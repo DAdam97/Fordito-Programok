@@ -8,3 +8,13 @@ C:\Users\Deák Ádám\source\repos\FordProgBeadando\FordProgBeadando\obj\Debug\F
 C:\Users\Deák Ádám\source\repos\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.csproj.CoreCompileInputs.cache
 C:\Users\Deák Ádám\source\repos\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.exe
 C:\Users\Deák Ádám\source\repos\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.pdb
+D:\Visual Studio 2019\Fordito Programok\FordProgBeadando\FordProgBeadando\bin\Debug\FordProgBeadando.exe.config
+D:\Visual Studio 2019\Fordito Programok\FordProgBeadando\FordProgBeadando\bin\Debug\FordProgBeadando.exe
+D:\Visual Studio 2019\Fordito Programok\FordProgBeadando\FordProgBeadando\bin\Debug\FordProgBeadando.pdb
+D:\Visual Studio 2019\Fordito Programok\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.csprojAssemblyReference.cache
+D:\Visual Studio 2019\Fordito Programok\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.Form1.resources
+D:\Visual Studio 2019\Fordito Programok\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.Properties.Resources.resources
+D:\Visual Studio 2019\Fordito Programok\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.csproj.GenerateResource.cache
+D:\Visual Studio 2019\Fordito Programok\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.csproj.CoreCompileInputs.cache
+D:\Visual Studio 2019\Fordito Programok\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.exe
+D:\Visual Studio 2019\Fordito Programok\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.pdb

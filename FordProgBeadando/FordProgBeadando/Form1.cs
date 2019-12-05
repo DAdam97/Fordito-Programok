@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -32,11 +33,19 @@ namespace FordProgBeadando
 
         private void Bt_openCsv_Click(object sender, EventArgs e)
         {
-            openCsvFile.ShowDialog();
+            try
+            {
+                openCsvFile.ShowDialog();
 
-            dgv_ruleTable.DataSource = CsvReader.GetRules(openCsvFile.FileName);
+                dgv_ruleTable.DataSource = CsvReader.GetRules(openCsvFile.FileName);
 
-            dgv_ruleTable.Font = new Font("Microsoft Sans Serif", 12);
+                dgv_ruleTable.Font = new Font("Microsoft Sans Serif", 12);
+            }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("Válasza ki a megfelelő csv filet.");                
+            }
+           
         }
 
         private void Bt_Analyze_Click(object sender, EventArgs e)
@@ -81,10 +90,17 @@ namespace FordProgBeadando
             InitTerminalSymbols(expression);
             InitRuleStack();
 
+            string terminal = terminalSymbols[0];
+            int symbolIndex = getTerminalSymbolIndex(terminal);
 
-            int symbol = getTerminalSymbolIndex(" ");
-            int rule = getRuleIndex("G");
-            MessageBox.Show(getCellRule(symbol, rule));
+            string noneTerminal = rules.Pop();
+            int ruleIndex = getRuleIndex(noneTerminal);
+
+            string rule = getCellRule(symbolIndex, ruleIndex);
+
+            string[] ruleAndRuleNum = rule.Split(';');
+
+            
         }
 
 
@@ -132,5 +148,22 @@ namespace FordProgBeadando
                 terminalSymbols.Add(c.ToString());
             }
         }
+
+
+        // TODO: ezt megoldani (lisát vermet foreachel bejárni és vissza adni stringbe)
+        /*
+        private string CollectionToString(object collection)
+        {
+            string temp = "";
+
+            foreach (var c in collection)
+            {
+                temp += c;
+            }
+
+            return temp;
+        }
+        */
+
     }
 }
