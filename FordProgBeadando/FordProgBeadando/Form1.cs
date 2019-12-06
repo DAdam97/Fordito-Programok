@@ -9,7 +9,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
 
 namespace FordProgBeadando
 {
@@ -50,7 +49,6 @@ namespace FordProgBeadando
             {
                 MessageBox.Show("Válasza ki a megfelelő csv filet.");
             }
-
         }
 
         private void Bt_Analyze_Click(object sender, EventArgs e)
@@ -77,7 +75,6 @@ namespace FordProgBeadando
             }
 
 
-
             if (isAnalyzable && isTableLoaded)
             {
                 Analyze(exp);
@@ -93,8 +90,6 @@ namespace FordProgBeadando
         Stack<string> rules = new Stack<string>();
 
         int index = 0;
-
-
 
         private void Analyze(string expression)
         {
@@ -120,7 +115,6 @@ namespace FordProgBeadando
                                                                 CollectionToString(ruleNumeber));
 
                     lb_steps.Items.Add(dataRow.ToString());
-
                 }
                 MessageBox.Show("Helyes a kifejezés!");
             }
@@ -128,9 +122,11 @@ namespace FordProgBeadando
             {
                 MessageBox.Show(e.Message);
             }
-
+            catch (TerminalSymbolNotFoundException e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
-
 
         private int getTerminalSymbolIndex(string symb)
         {
@@ -142,9 +138,7 @@ namespace FordProgBeadando
                 }
             }
 
-            return -1;
-
-            // throw new TerminalSymbolNotFoundException();
+            throw new TerminalSymbolNotFoundException(String.Format($"HIBA: Nem létező termináls szimbólum a kifejezésben: {symb}"));
         }
 
         private int getRuleIndex(string rule)
@@ -157,14 +151,16 @@ namespace FordProgBeadando
                 }
             }
 
-            return -1;
-
-            // throw new RuleNotFoundException();
+            throw new RuleNotFoundException();
         }
 
         private string getCellRule(int symbolIndex, int ruleIndex)
         {
-            return (string)dgv_ruleTable.Rows[ruleIndex].Cells[symbolIndex].Value;
+            string cell = (string)dgv_ruleTable.Rows[ruleIndex].Cells[symbolIndex].Value;
+
+            if (cell == "") { throw new WrongInputException(String.Format($"HIBA: {terminalSymbols[0]} és {rules.Peek()} Alkalmazásánál.")); }
+
+            return cell;
         }
 
         private void InitRuleStack()
@@ -172,6 +168,7 @@ namespace FordProgBeadando
             rules.Push("#");
             rules.Push("E");
         }
+
         private void InitTerminalSymbols(string exp)
         {
             foreach (var c in exp)
@@ -209,7 +206,6 @@ namespace FordProgBeadando
                     break;
 
                 case "":
-                    throw new WrongInputException(String.Format($"HIBA: {terminalSymbols[0]} és {rules.Peek()} Alkalmazásánál."));
                     break;
 
                 case "accept":
@@ -240,34 +236,96 @@ namespace FordProgBeadando
             ruleNumeber.Clear();
         }
 
+        bool isAnalyzable = false;
+        string exp = "";
 
-
-
-
-
-        // ===========< TEST GOMB >===========
-        private void Button1_Click(object sender, EventArgs e)
+        private void bt_StepAnalyze_Click(object sender, EventArgs e)
         {
-            InitRuleStack();
-            InitTerminalSymbols("i+i#");
 
-            string cell = getCellRule(1, 5);
-            string message = "";
-            message += "előtte \n";
-            message += cell + "\n";
-            message += CollectionToString(terminalSymbols) + "\n";
-            message += CollectionToString(rules) + "\n";
-            message += CollectionToString(ruleNumeber) + "\n";
+            if (!isAnalyzable)
+            {
 
-            ProcessCell(cell);
+                if (lbl_output.Text != "output")
+                {
+                    if (lbl_output.Text.Substring(lbl_output.Text.Length - 1, 1) == "#")
+                    {
+                        exp = lbl_output.Text;
+                        isAnalyzable = true;
+                    }
+                    else
+                    {
+                        exp = lbl_output.Text + '#';
+                        isAnalyzable = true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Irjon be egy kifejezést.");
+                }
+            }
 
-            message += "utánna \n";
-            message += CollectionToString(terminalSymbols) + "\n";
-            message += CollectionToString(rules) + "\n";
-            message += CollectionToString(ruleNumeber) + "\n";
+
+            if (isAnalyzable && isTableLoaded)
+            {
+                AnalyzeStepByStep(exp);
+            }
+            else
+            {
+                MessageBox.Show("Töltse be a táblát.");
+            }
+        }
+
+        bool isAnalyzeBegan = false;
+        bool isFinished = false;
+
+        private void AnalyzeStepByStep(string expression)
+        {
+            if (!isAnalyzeBegan)
+            {
+                ResetEverything();
+
+                InitTerminalSymbols(expression);
+                InitRuleStack();
+                isAnalyzeBegan = true;
+            }
 
 
-            MessageBox.Show(message);
+            try
+            {
+                if (!isFinished)
+                {
+                    string terminal = terminalSymbols[0];
+                    int symbolIndex = getTerminalSymbolIndex(terminal);
+
+                    string noneTerminal = rules.Peek();
+                    int ruleIndex = getRuleIndex(noneTerminal);
+
+                    string cellData = getCellRule(symbolIndex, ruleIndex);
+                    ProcessCell(cellData);
+
+                    ListBoxDataRow dataRow = new ListBoxDataRow(CollectionToString(terminalSymbols),
+                                                                CollectionToString(rules),
+                                                                CollectionToString(ruleNumeber));
+
+                    lb_steps.Items.Add(dataRow.ToString());
+                    isFinished = rules.Peek() == "#" && terminalSymbols[0] == "#";
+                }
+                else
+                {
+                    isAnalyzeBegan = false;
+                    isFinished = false;
+                    isAnalyzable = false;
+                    MessageBox.Show("Helyes a kifejezés!");
+                }
+            }
+            catch (WrongInputException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            catch (TerminalSymbolNotFoundException e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
     }
 }

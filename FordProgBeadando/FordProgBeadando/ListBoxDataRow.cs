@@ -25,7 +25,7 @@ namespace FordProgBeadando
         public string Numbers
         {
             get { return numbers; }
-            set { numbers = value; }
+            set { numbers = value; }            
         }
 
         public override string ToString()

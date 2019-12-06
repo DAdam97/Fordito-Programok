@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.top_panel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.bt_StepAnalyze = new System.Windows.Forms.Button();
             this.bt_Analyze = new System.Windows.Forms.Button();
             this.bt_openCsv = new System.Windows.Forms.Button();
             this.bt_acceptInput = new System.Windows.Forms.Button();
@@ -48,7 +48,7 @@
             // 
             // top_panel
             // 
-            this.top_panel.Controls.Add(this.button1);
+            this.top_panel.Controls.Add(this.bt_StepAnalyze);
             this.top_panel.Controls.Add(this.bt_Analyze);
             this.top_panel.Controls.Add(this.bt_openCsv);
             this.top_panel.Controls.Add(this.bt_acceptInput);
@@ -60,25 +60,26 @@
             this.top_panel.Size = new System.Drawing.Size(1197, 98);
             this.top_panel.TabIndex = 1;
             // 
-            // button1
+            // bt_StepAnalyze
             // 
-            this.button1.Location = new System.Drawing.Point(878, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(215, 56);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "test";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.bt_StepAnalyze.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.bt_StepAnalyze.Location = new System.Drawing.Point(672, 12);
+            this.bt_StepAnalyze.Name = "bt_StepAnalyze";
+            this.bt_StepAnalyze.Size = new System.Drawing.Size(113, 68);
+            this.bt_StepAnalyze.TabIndex = 7;
+            this.bt_StepAnalyze.Text = "Léptet";
+            this.bt_StepAnalyze.UseVisualStyleBackColor = true;
+            this.bt_StepAnalyze.Click += new System.EventHandler(this.bt_StepAnalyze_Click);
             // 
             // bt_Analyze
             // 
             this.bt_Analyze.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_Analyze.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.bt_Analyze.Location = new System.Drawing.Point(718, 12);
+            this.bt_Analyze.Location = new System.Drawing.Point(1078, 12);
             this.bt_Analyze.Name = "bt_Analyze";
             this.bt_Analyze.Size = new System.Drawing.Size(107, 68);
             this.bt_Analyze.TabIndex = 5;
-            this.bt_Analyze.Text = "Elemzés";
+            this.bt_Analyze.Text = "Elemez";
             this.bt_Analyze.UseVisualStyleBackColor = true;
             this.bt_Analyze.Click += new System.EventHandler(this.Bt_Analyze_Click);
             // 
@@ -89,7 +90,7 @@
             this.bt_openCsv.Name = "bt_openCsv";
             this.bt_openCsv.Size = new System.Drawing.Size(130, 68);
             this.bt_openCsv.TabIndex = 4;
-            this.bt_openCsv.Text = "Megnyitás";
+            this.bt_openCsv.Text = "Megnyit";
             this.bt_openCsv.UseVisualStyleBackColor = true;
             this.bt_openCsv.Click += new System.EventHandler(this.Bt_openCsv_Click);
             // 
@@ -97,7 +98,7 @@
             // 
             this.bt_acceptInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_acceptInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.bt_acceptInput.Location = new System.Drawing.Point(550, 12);
+            this.bt_acceptInput.Location = new System.Drawing.Point(503, 12);
             this.bt_acceptInput.Name = "bt_acceptInput";
             this.bt_acceptInput.Size = new System.Drawing.Size(130, 68);
             this.bt_acceptInput.TabIndex = 1;
@@ -109,7 +110,7 @@
             // 
             this.tb_input.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tb_input.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.tb_input.Location = new System.Drawing.Point(284, 12);
+            this.tb_input.Location = new System.Drawing.Point(250, 12);
             this.tb_input.Name = "tb_input";
             this.tb_input.Size = new System.Drawing.Size(247, 29);
             this.tb_input.TabIndex = 2;
@@ -119,7 +120,7 @@
             this.lbl_output.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_output.AutoSize = true;
             this.lbl_output.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lbl_output.Location = new System.Drawing.Point(280, 60);
+            this.lbl_output.Location = new System.Drawing.Point(245, 55);
             this.lbl_output.Name = "lbl_output";
             this.lbl_output.Size = new System.Drawing.Size(72, 25);
             this.lbl_output.TabIndex = 3;
@@ -155,9 +156,9 @@
             this.lb_steps.FormattingEnabled = true;
             this.lb_steps.HorizontalScrollbar = true;
             this.lb_steps.ItemHeight = 24;
-            this.lb_steps.Location = new System.Drawing.Point(718, 6);
+            this.lb_steps.Location = new System.Drawing.Point(672, 6);
             this.lb_steps.Name = "lb_steps";
-            this.lb_steps.Size = new System.Drawing.Size(467, 556);
+            this.lb_steps.Size = new System.Drawing.Size(513, 556);
             this.lb_steps.TabIndex = 1;
             // 
             // dgv_ruleTable
@@ -172,7 +173,7 @@
             this.dgv_ruleTable.Location = new System.Drawing.Point(12, 6);
             this.dgv_ruleTable.Name = "dgv_ruleTable";
             this.dgv_ruleTable.ReadOnly = true;
-            this.dgv_ruleTable.Size = new System.Drawing.Size(668, 555);
+            this.dgv_ruleTable.Size = new System.Drawing.Size(621, 555);
             this.dgv_ruleTable.TabIndex = 0;
             // 
             // openCsvFile
@@ -209,7 +210,7 @@
         private System.Windows.Forms.Button bt_openCsv;
         private System.Windows.Forms.OpenFileDialog openCsvFile;
         private System.Windows.Forms.Button bt_Analyze;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button bt_StepAnalyze;
     }
 }
 
