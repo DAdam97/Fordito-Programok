@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace FordProgBeadando
 {
@@ -31,6 +32,8 @@ namespace FordProgBeadando
             }
         }
 
+        bool isTableLoaded = false;
+
         private void Bt_openCsv_Click(object sender, EventArgs e)
         {
             try
@@ -40,12 +43,14 @@ namespace FordProgBeadando
                 dgv_ruleTable.DataSource = CsvReader.GetRules(openCsvFile.FileName);
 
                 dgv_ruleTable.Font = new Font("Microsoft Sans Serif", 12);
+
+                isTableLoaded = true;
             }
             catch (FileNotFoundException)
             {
-                MessageBox.Show("Válasza ki a megfelelő csv filet.");                
+                MessageBox.Show("Válasza ki a megfelelő csv filet.");
             }
-           
+
         }
 
         private void Bt_Analyze_Click(object sender, EventArgs e)
@@ -73,9 +78,13 @@ namespace FordProgBeadando
 
 
 
-            if (isAnalyzable)
+            if (isAnalyzable && isTableLoaded)
             {
                 Analyze(exp);
+            }
+            else
+            {
+                MessageBox.Show("Töltse be a táblát.");
             }
         }
 
@@ -85,22 +94,41 @@ namespace FordProgBeadando
 
         int index = 0;
 
+
+
         private void Analyze(string expression)
         {
+            ResetEverything();
+
             InitTerminalSymbols(expression);
             InitRuleStack();
+            try
+            {
+                while (!(rules.Peek() == "#" && terminalSymbols[0] == "#"))
+                {
+                    string terminal = terminalSymbols[0];
+                    int symbolIndex = getTerminalSymbolIndex(terminal);
 
-            string terminal = terminalSymbols[0];
-            int symbolIndex = getTerminalSymbolIndex(terminal);
+                    string noneTerminal = rules.Peek();
+                    int ruleIndex = getRuleIndex(noneTerminal);
 
-            string noneTerminal = rules.Pop();
-            int ruleIndex = getRuleIndex(noneTerminal);
+                    string cellData = getCellRule(symbolIndex, ruleIndex);
+                    ProcessCell(cellData);
 
-            string rule = getCellRule(symbolIndex, ruleIndex);
+                    ListBoxDataRow dataRow = new ListBoxDataRow(CollectionToString(terminalSymbols),
+                                                                CollectionToString(rules),
+                                                                CollectionToString(ruleNumeber));
 
-            string[] ruleAndRuleNum = rule.Split(';');
+                    lb_steps.Items.Add(dataRow.ToString());
 
-            
+                }
+                MessageBox.Show("Helyes a kifejezés!");
+            }
+            catch (WrongInputException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
         }
 
 
@@ -114,7 +142,9 @@ namespace FordProgBeadando
                 }
             }
 
-            throw new TerminalSymbolNotFoundException();
+            return -1;
+
+            // throw new TerminalSymbolNotFoundException();
         }
 
         private int getRuleIndex(string rule)
@@ -127,7 +157,9 @@ namespace FordProgBeadando
                 }
             }
 
-            throw new RuleNotFoundException();
+            return -1;
+
+            // throw new RuleNotFoundException();
         }
 
         private string getCellRule(int symbolIndex, int ruleIndex)
@@ -140,7 +172,6 @@ namespace FordProgBeadando
             rules.Push("#");
             rules.Push("E");
         }
-
         private void InitTerminalSymbols(string exp)
         {
             foreach (var c in exp)
@@ -149,10 +180,7 @@ namespace FordProgBeadando
             }
         }
 
-
-        // TODO: ezt megoldani (lisát vermet foreachel bejárni és vissza adni stringbe)
-        /*
-        private string CollectionToString(object collection)
+        private string CollectionToString(IEnumerable<string> collection)
         {
             string temp = "";
 
@@ -163,7 +191,83 @@ namespace FordProgBeadando
 
             return temp;
         }
-        */
 
+        private void ProcessCell(string cellData)
+        {
+            string[] temp = cellData.Split(';');
+
+            switch (temp[0])
+            {
+                case "pop":
+                    rules.Pop();
+                    terminalSymbols.RemoveAt(0);
+                    break;
+
+                case "eps":
+                    rules.Pop();
+                    ruleNumeber.Add(temp[1]);
+                    break;
+
+                case "":
+                    throw new WrongInputException(String.Format($"HIBA: {terminalSymbols[0]} és {rules.Peek()} Alkalmazásánál."));
+                    break;
+
+                case "accept":
+                    break;
+
+                default:
+                    AddRuleAndRuleNum(temp[0], temp[1]);
+                    break;
+            }
+        }
+
+        public void AddRuleAndRuleNum(string rule, string number)
+        {
+            ruleNumeber.Add(number);
+            rules.Pop();
+
+            for (int i = rule.Length - 1; i >= 0; i--)
+            {
+                rules.Push(rule[i].ToString());
+            }
+        }
+
+        public void ResetEverything()
+        {
+            lb_steps.Items.Clear();
+            terminalSymbols.Clear();
+            rules.Clear();
+            ruleNumeber.Clear();
+        }
+
+
+
+
+
+
+        // ===========< TEST GOMB >===========
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            InitRuleStack();
+            InitTerminalSymbols("i+i#");
+
+            string cell = getCellRule(1, 5);
+            string message = "";
+            message += "előtte \n";
+            message += cell + "\n";
+            message += CollectionToString(terminalSymbols) + "\n";
+            message += CollectionToString(rules) + "\n";
+            message += CollectionToString(ruleNumeber) + "\n";
+
+            ProcessCell(cell);
+
+            message += "utánna \n";
+            message += CollectionToString(terminalSymbols) + "\n";
+            message += CollectionToString(rules) + "\n";
+            message += CollectionToString(ruleNumeber) + "\n";
+
+
+            MessageBox.Show(message);
+        }
     }
 }
