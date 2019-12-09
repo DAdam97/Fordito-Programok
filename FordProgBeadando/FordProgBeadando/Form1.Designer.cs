@@ -57,13 +57,14 @@
             this.top_panel.Dock = System.Windows.Forms.DockStyle.Top;
             this.top_panel.Location = new System.Drawing.Point(0, 0);
             this.top_panel.Name = "top_panel";
-            this.top_panel.Size = new System.Drawing.Size(1197, 98);
+            this.top_panel.Size = new System.Drawing.Size(1264, 98);
             this.top_panel.TabIndex = 1;
             // 
             // bt_StepAnalyze
             // 
+            this.bt_StepAnalyze.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_StepAnalyze.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.bt_StepAnalyze.Location = new System.Drawing.Point(672, 12);
+            this.bt_StepAnalyze.Location = new System.Drawing.Point(854, 12);
             this.bt_StepAnalyze.Name = "bt_StepAnalyze";
             this.bt_StepAnalyze.Size = new System.Drawing.Size(113, 68);
             this.bt_StepAnalyze.TabIndex = 7;
@@ -75,7 +76,7 @@
             // 
             this.bt_Analyze.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_Analyze.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.bt_Analyze.Location = new System.Drawing.Point(1078, 12);
+            this.bt_Analyze.Location = new System.Drawing.Point(1145, 12);
             this.bt_Analyze.Name = "bt_Analyze";
             this.bt_Analyze.Size = new System.Drawing.Size(107, 68);
             this.bt_Analyze.TabIndex = 5;
@@ -98,7 +99,7 @@
             // 
             this.bt_acceptInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_acceptInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.bt_acceptInput.Location = new System.Drawing.Point(503, 12);
+            this.bt_acceptInput.Location = new System.Drawing.Point(693, 12);
             this.bt_acceptInput.Name = "bt_acceptInput";
             this.bt_acceptInput.Size = new System.Drawing.Size(130, 68);
             this.bt_acceptInput.TabIndex = 1;
@@ -108,19 +109,21 @@
             // 
             // tb_input
             // 
-            this.tb_input.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tb_input.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tb_input.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.tb_input.Location = new System.Drawing.Point(250, 12);
+            this.tb_input.Location = new System.Drawing.Point(170, 12);
             this.tb_input.Name = "tb_input";
-            this.tb_input.Size = new System.Drawing.Size(247, 29);
+            this.tb_input.Size = new System.Drawing.Size(494, 29);
             this.tb_input.TabIndex = 2;
             // 
             // lbl_output
             // 
-            this.lbl_output.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_output.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_output.AutoSize = true;
             this.lbl_output.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lbl_output.Location = new System.Drawing.Point(245, 55);
+            this.lbl_output.Location = new System.Drawing.Point(165, 55);
             this.lbl_output.Name = "lbl_output";
             this.lbl_output.Size = new System.Drawing.Size(72, 25);
             this.lbl_output.TabIndex = 3;
@@ -135,7 +138,7 @@
             this.main_panel.Controls.Add(this.top_panel);
             this.main_panel.Location = new System.Drawing.Point(0, 0);
             this.main_panel.Name = "main_panel";
-            this.main_panel.Size = new System.Drawing.Size(1197, 671);
+            this.main_panel.Size = new System.Drawing.Size(1264, 729);
             this.main_panel.TabIndex = 4;
             // 
             // mid_panel
@@ -145,7 +148,7 @@
             this.mid_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mid_panel.Location = new System.Drawing.Point(0, 98);
             this.mid_panel.Name = "mid_panel";
-            this.mid_panel.Size = new System.Drawing.Size(1197, 573);
+            this.mid_panel.Size = new System.Drawing.Size(1264, 631);
             this.mid_panel.TabIndex = 2;
             // 
             // lb_steps
@@ -156,9 +159,9 @@
             this.lb_steps.FormattingEnabled = true;
             this.lb_steps.HorizontalScrollbar = true;
             this.lb_steps.ItemHeight = 24;
-            this.lb_steps.Location = new System.Drawing.Point(672, 6);
+            this.lb_steps.Location = new System.Drawing.Point(854, 6);
             this.lb_steps.Name = "lb_steps";
-            this.lb_steps.Size = new System.Drawing.Size(513, 556);
+            this.lb_steps.Size = new System.Drawing.Size(398, 604);
             this.lb_steps.TabIndex = 1;
             // 
             // dgv_ruleTable
@@ -171,9 +174,10 @@
             this.dgv_ruleTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_ruleTable.GridColor = System.Drawing.SystemColors.ActiveBorder;
             this.dgv_ruleTable.Location = new System.Drawing.Point(12, 6);
+            this.dgv_ruleTable.MinimumSize = new System.Drawing.Size(555, 275);
             this.dgv_ruleTable.Name = "dgv_ruleTable";
             this.dgv_ruleTable.ReadOnly = true;
-            this.dgv_ruleTable.Size = new System.Drawing.Size(621, 555);
+            this.dgv_ruleTable.Size = new System.Drawing.Size(811, 333);
             this.dgv_ruleTable.TabIndex = 0;
             // 
             // openCsvFile
@@ -184,8 +188,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1197, 671);
+            this.ClientSize = new System.Drawing.Size(1264, 729);
             this.Controls.Add(this.main_panel);
+            this.MinimumSize = new System.Drawing.Size(1280, 768);
             this.Name = "Form1";
             this.Text = "Form1";
             this.top_panel.ResumeLayout(false);

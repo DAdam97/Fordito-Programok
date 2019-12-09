@@ -23,7 +23,7 @@ namespace FordProgBeadando
         {
             if (tb_input.Text.Length > 0)
             {
-                lbl_output.Text = Regex.Replace(tb_input.Text, "[0-9]+", "i");
+                lbl_output.Text = Regex.Replace(tb_input.Text, "[0-9]+|[A-z]+", "i");
             }
             else
             {
@@ -44,6 +44,8 @@ namespace FordProgBeadando
                 dgv_ruleTable.Font = new Font("Microsoft Sans Serif", 12);
 
                 isTableLoaded = true;
+
+                
             }
             catch (FileNotFoundException)
             {
@@ -241,10 +243,8 @@ namespace FordProgBeadando
 
         private void bt_StepAnalyze_Click(object sender, EventArgs e)
         {
-
             if (!isAnalyzable)
             {
-
                 if (lbl_output.Text != "output")
                 {
                     if (lbl_output.Text.Substring(lbl_output.Text.Length - 1, 1) == "#")
@@ -263,7 +263,6 @@ namespace FordProgBeadando
                     MessageBox.Show("Irjon be egy kifejezést.");
                 }
             }
-
 
             if (isAnalyzable && isTableLoaded)
             {
@@ -288,7 +287,6 @@ namespace FordProgBeadando
                 InitRuleStack();
                 isAnalyzeBegan = true;
             }
-
 
             try
             {
